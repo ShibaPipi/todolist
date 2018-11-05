@@ -8,11 +8,15 @@ class TodoItem extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.content !== this.props.content;
+    }
+
     render() {
-        const {content, test} = this.props;
+        const {content} = this.props;
         return (
             <div onClick={this.handleClick}>
-                {test} - {content}
+                {content}
             </div>
         )
     }

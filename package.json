@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "npm": "^6.4.1",
+    "peer": "^0.2.10",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-scripts": "2.0.5"
+    "react-scripts": "2.0.5",
+    "react-transition-group": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
