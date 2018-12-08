@@ -1,22 +1,29 @@
 import React from "react";
+import 'antd/dist/antd.css';
+import {Input, Button, List} from "antd";
 import {connect} from "react-redux";
+import {getAddItemAction, getDeleteItemAction, getInputChangeAction} from "./store/actionCreators";
 
 const TodoList = (props) => {
     const {inputValue, changeInputValue, handleClick, list, handleDelete} = props;
 
     return (
-        <div>
+        <div style={{marginTop: "10px", marginLeft: "10px"}}>
             <div>
-                <input type="text" value={inputValue} onChange={changeInputValue}/>
-                <button onClick={handleClick}>提交</button>
+                <Input
+                    value={inputValue}
+                    placeholder="todo info"
+                    style={{width: "300px", marginRight: "10px"}}
+                    onChange={changeInputValue}
+                />
+                <Button type="primary" onClick={handleClick}>提交</Button>
             </div>
-            <ul>
-                {
-                    list.map((item, index) => {
-                        return <li onClick={() => (handleDelete(index))} key={index}>{item}</li>
-                    })
-                }
-            </ul>
+            <List
+                style={{marginTop: "10px", width: "300px"}}
+                bordered
+                dataSource={list}
+                renderItem={(item, index) => (<List.Item onClick={() => {handleDelete(index)}}>{item}</List.Item>)}
+            />
         </div>
     );
 };
@@ -32,25 +39,17 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changeInputValue(e) {
-            const action = {
-                type: "change_input_value",
-                value: e.target.value,
-            };
+            const action = getInputChangeAction(e.target.value);
             dispatch(action);
         },
 
         handleClick() {
-            const action = {
-                type: "add_item",
-            };
+            const action = getAddItemAction();
             dispatch(action);
         },
 
-        handleDelete(index) {
-            const action = {
-                type: "delete_item",
-                index,
-            };
+        handleDelete(listIndex) {
+            const action = getDeleteItemAction(listIndex);
             dispatch(action);
         }
     }
