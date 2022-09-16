@@ -1,9 +1,5 @@
 import { FC } from "react";
 
-import { TodoList } from "./TodoList";
-
-import "./style.css";
-
-const App: FC = () => <TodoList />;
+const App: FC = () => <>APP</>;
 
 export default App;
